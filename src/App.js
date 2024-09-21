@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Box, Container } from "@mui/material";
+import Header from "./components/Header";
+import Tickets from "./components/Tickets";
 
 function App() {
+  const [refreshFlag, setRefreshFlag] = useState(false);
+
+  const handleRefresh = () => {
+    setRefreshFlag((prev) => !prev);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+      <Header title="InsightPro Demo DB" onRefresh={handleRefresh} />
+      <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: "auto", mt: 8 }}>
+        {/* mt: 8 adds top margin to prevent overlap with the fixed header */}
+        <Container maxWidth="md">
+          <Tickets refreshFlag={refreshFlag} />
+        </Container>
+      </Box>
+    </Box>
   );
 }
 
