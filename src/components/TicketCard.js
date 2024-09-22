@@ -8,6 +8,7 @@ import {
   IconButton,
   Box,
   CircularProgress,
+  Tooltip,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { format } from "date-fns";
@@ -24,9 +25,12 @@ function TicketCard({ ticket, onDelete }) {
   return (
     <Card sx={{ maxWidth: 500, marginBottom: 2 }}>
       <CardContent>
+        {/* Created Date */}
         <Typography variant="caption" color="text.secondary">
           {format(new Date(ticket.created_at), "PPP p")}
         </Typography>
+
+        {/* Title and Delete Button */}
         <Box
           sx={{
             display: "flex",
@@ -46,9 +50,25 @@ function TicketCard({ ticket, onDelete }) {
             {deleting ? <CircularProgress size={20} /> : <DeleteIcon />}
           </IconButton>
         </Box>
-        <Typography variant="body2" color="text.primary" sx={{ mt: 1 }}>
-          {ticket.content}
-        </Typography>
+
+        {/* Content with Multi-Line Truncation and Tooltip */}
+        <Tooltip title={ticket.content} arrow>
+          <Typography
+            variant="body2"
+            color="text.primary"
+            sx={{
+              mt: 1,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitLineClamp: 3, // Number of lines to show
+              WebkitBoxOrient: "vertical",
+              cursor: "pointer",
+            }}
+          >
+            {ticket.content}
+          </Typography>
+        </Tooltip>
       </CardContent>
     </Card>
   );

@@ -12,7 +12,7 @@ function App() {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      <Header title="InsightPro Demo DB" onRefresh={handleRefresh} />
+      <Header title="AssistPro Demo DB" onRefresh={handleRefresh} />
       <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: "auto", mt: 8 }}>
         {/* mt: 8 adds top margin to prevent overlap with the fixed header */}
         <Container maxWidth="md">
